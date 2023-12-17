@@ -23,7 +23,7 @@ body {
     text-align: center;
 }
 
-.button {
+input[type="button"] {
     min-width: 190px;
     font-size: 1rem;
     font-weight: 400;
@@ -34,7 +34,7 @@ body {
     border-radius: 3px;
 }
 
-.button:hover {
+input[type="button"]:hover {
     border: none;
     cursor: pointer;
     background-color: rgba(62, 76, 117, 0.8);
