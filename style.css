@@ -16,11 +16,69 @@ body {
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
     background-color: #F9FBFC;
+    color: rgb(62, 76, 117);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin: 0 auto;
     position: relative;
     text-align: center;
+}
+
+.counter {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+
+#elapsing-time {
+    font-size: 8rem;
+    font-weight: 500;
+    /* color: rgb(41, 173, 178); */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.inputs {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="text"] {
+    min-width: 190px;
+    font-size: 1rem;
+    font-weight: 400;
+    border: 1px solid rgb(62, 76, 117);;
+    color: rgb(62, 76, 117);
+    background-color: rgb(255, 255, 255);
+    padding: 0.75rem 1rem;
+    border-radius: 3px;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: -4rem;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 input[type="button"] {
@@ -32,24 +90,38 @@ input[type="button"] {
     color: rgb(255, 255, 255);
     padding: 0.75rem 1rem;
     border-radius: 3px;
+    text-align: center;
+}
+
+input[type="button"]#start,
+input[type="button"]#resume  {
+    background-color: rgb(19, 183, 99);
+}
+
+input[type="button"]#resume,
+input[type="button"]#pause {
+    display: none;
+}
+
+
+input[type="button"]#pause {
+    background-color: rgb(224, 202, 60);
 }
 
 input[type="button"]:hover {
     border: none;
     cursor: pointer;
-    background-color: rgba(62, 76, 117, 0.8);
+    opacity: 0.9;
 }
 
 /* Footer */
 .attribution {
     text-align: center;
     width: 100%;
-    padding-bottom: 0.3rem;
     font-size: 0.7rem;
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 999;
 }
 
 .attribution a {

@@ -12,21 +12,24 @@
 <body>
     <div class="counter">
         <div class="title">
-            <h1>Count down time</h1>
+            <h1>Count down time!</h1>
             <p class="description">My own flavored pomodoro.</p>
         </div>
 
         <div id="elapsing-time"></div>
-        <div class="controls">
             <form action="post">
-                <label for="time">Time in minutes:</label>
-                <input type="text" name="time" id="time" value="180" >
-                <input type="button" id="start" value="Start" />
-                <input type="button" id="pause" value="Pause" />
-                <input type="button" id="reset" value="Resume" />
-                <input type="button" id="reset"value="Reset" />
+                <div class="inputs">
+                    <label for="time">Set time in minutes:</label>
+                    <input type="text" name="time" id="time" value="180" >
+                </div>
+                <div class="controls">
+                    <input type="button" id="start" value="&#x23F5; Start" />
+                    <input type="button" id="pause" value="&#x23F8; Pause" />
+                    <input type="button" id="resume" value="&#x23F5; Resume" />
+                    <input type="button" id="reset"value="&#x27F2; Reset" />
+                </div>
             </form>
-        </div>
+        
     </div>
     <p class="attribution">Coded by<a href="http://ilieadrian.com">Ilie Adrian</a></p>
     <script src="script.js"></script>
