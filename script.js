@@ -1,33 +1,45 @@
-// import items
-let startBtn = document.getElementById("start");
-let pauseBtn = document.getElementById("pause");
-let resumeBtn = document.getElementById("resume");
-let resetBtn = document.getElementById("reset");
-let hours;
-let minutes;
-let seconds = 60;
-let countDownIsDone = false;
+const startBtn = document.getElementById("start");
+const pauseBtn = document.getElementById("pause");
+const resumeBtn = document.getElementById("resume");
+const resetBtn = document.getElementById("reset");
+const timerDisplay = document.getElementById("timer");
+let countdown;
 
-// take input from the user an split it in minutes / and seconds
 function processInputedTime() {
-    let timeChosenByUser = document.getElementById("time").value.trim();
-    let num = +timeChosenByUser;
-    let intialHours = num / 60;
-    hours = Math.floor(intialHours);
-    let intialMinutes = (intialHours - hours) * 60;
-    minutes = Math.round(intialMinutes);
+    const timeChosenByUser = document.getElementById("time").value.trim();
+    const num = +Math.round(timeChosenByUser);
 
-    countDown()
+    timer(num * 60);
 }
 
-// countdown the time
-function countDown() {
-    console.table([hours, minutes, seconds])
-    // https://stackoverflow.com/questions/20618355/how-to-write-a-countdown-timer-in-javascript
-    // https://medium.com/geekculture/23-javascript-countdown-timer-for-website-273efc2f5618
+function timer(seconds) {
+    clearInterval(countdown);
+
+    const actualTime = Date.now();
+    const setTime = actualTime + seconds * 1000;
+    updateDisplay(seconds)
+
+    countdown = setInterval(() => {
+        const secondsLeft = Math.round((setTime - Date.now()) / 1000);
+
+        if (secondsLeft < 0) {
+            clearInterval(countdown)
+            return;
+        }
+        updateDisplay(secondsLeft);
+    }, 1000);
+    
 }
 
-// update display with the count down
+
+function updateDisplay(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor(seconds / 60);
+    const remainderSeconds = seconds % 60;
+    const display = `${hours}h:${minutes}m:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
+    document.title = display;
+    timerDisplay.innerHTML = display;
+}
 
 // pause/resume function
 
@@ -36,6 +48,9 @@ function countDown() {
 // set audio alert when time is done
 
 // store set time in local host and retrive it if is there
+
+// https://stackoverflow.com/questions/20618355/how-to-write-a-countdown-timer-in-javascript
+// https://medium.com/geekculture/23-javascript-countdown-timer-for-website-273efc2f5618
 
 
 
