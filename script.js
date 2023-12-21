@@ -7,7 +7,7 @@ let countdown;
 
 function processInputedTime() {
     const timeChosenByUser = document.getElementById("time").value.trim();
-    const num = +Math.round(timeChosenByUser);
+    const num = parseInt(timeChosenByUser);
 
     timer(num * 60);
 }
@@ -31,15 +31,36 @@ function timer(seconds) {
     
 }
 
+// intelege modificarea de mai jos
+// intelege modificarea de mai jos
+// intelege modificarea de mai jos
+// intelege modificarea de mai jos
+// intelege modificarea de mai jos
+
+
+// function updateDisplay(seconds) {
+//     const hours = Math.floor(seconds / 3600);
+//     const minutes = Math.floor(seconds / 60);
+//     const remainderSeconds = seconds % 60;
+//     const display = `${hours}h:${minutes}m:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
+//     document.title = display;
+//     timerDisplay.innerHTML = display;
+// }
+
 
 function updateDisplay(seconds) {
     const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor(seconds / 60);
-    const remainderSeconds = seconds % 60;
-    const display = `${hours}h:${minutes}m:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
+    const remainingSecondsAfterHours = seconds % 3600;
+    const minutes = Math.floor(remainingSecondsAfterHours / 60);
+    const remainderSeconds = remainingSecondsAfterHours % 60;
+
+    const display = `${hours}h: ${minutes}m: ${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
+    
     document.title = display;
     timerDisplay.innerHTML = display;
 }
+
+
 
 // pause/resume function
 
@@ -57,5 +78,6 @@ function updateDisplay(seconds) {
 
 
 startBtn.addEventListener("click", function(e) {
+    e.preventDefault();
     processInputedTime();
 });
