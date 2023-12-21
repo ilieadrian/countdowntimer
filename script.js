@@ -9,6 +9,14 @@ let secondsLeft;
 function processInputedTime() {
     const timeChosenByUser = document.getElementById("time").value.trim();
     const num = parseInt(timeChosenByUser);
+
+    if (isNaN(num)) {
+        timerDisplay.textContent = "Please enter a number";
+        timerDisplay.classList.add("error");
+        document.getElementById("time").value = 180;
+        return;
+    }
+    timerDisplay.classList.remove("error");
     startBtn.classList.toggle("display-none");
     pauseBtn.classList.toggle("display-none");
 
@@ -16,8 +24,6 @@ function processInputedTime() {
 }
 
 function timer(seconds) {
-    console.log(seconds);
-
     clearInterval(countdown);
 
     const actualTime = Date.now();
@@ -46,7 +52,6 @@ function updateDisplay(seconds) {
     
     document.title = display;
     timerDisplay.innerHTML = display;
-    console.log(remainderSecondsAfterHours);
 }
 
 
@@ -64,16 +69,21 @@ function pauseCountdown(){
     
 }
 
+function reset() {
+    pauseBtn.classList.add("display-none");
+    resumeBtn.classList.add("display-none");
+    startBtn.classList.remove("display-none");
 
-// reset function
+    clearInterval(countdown);
+
+    document.getElementById("time").value = 180;
+    timerDisplay.textContent = "00h:00m:00s";
+    timerDisplay.classList.remove("error");
+}
 
 // set audio alert when time is done
 
 // store set time in local host and retrive it if is there
-
-// https://stackoverflow.com/questions/20618355/how-to-write-a-countdown-timer-in-javascript
-// https://medium.com/geekculture/23-javascript-countdown-timer-for-website-273efc2f5618
-
 
 
 
@@ -85,4 +95,8 @@ startBtn.addEventListener("click", function(e) {
 
 pauseBtn.addEventListener("click", function(e) {
     pauseCountdown();
+});
+
+resetBtn.addEventListener("click", function(e) {
+    reset();
 });

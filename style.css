@@ -46,6 +46,11 @@ h1 {
     font-weight: 500;
     /* color: rgb(41, 173, 178); */
 }
+#timer.error {
+    font-size: 3rem;
+    font-weight: 500;
+    /* color: rgb(41, 173, 178); */
+}
 
 form {
     display: flex;
@@ -116,6 +121,11 @@ input[type="button"]:hover {
     border: none;
     cursor: pointer;
     opacity: 0.9;
+}
+
+.error {
+    font-size: 2rem;
+    color: red;
 }
 
 /* Footer */
