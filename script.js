@@ -4,15 +4,20 @@ const resumeBtn = document.getElementById("resume");
 const resetBtn = document.getElementById("reset");
 const timerDisplay = document.getElementById("timer");
 let countdown;
+let secondsLeft;
 
 function processInputedTime() {
     const timeChosenByUser = document.getElementById("time").value.trim();
     const num = parseInt(timeChosenByUser);
+    startBtn.classList.toggle("display-none");
+    pauseBtn.classList.toggle("display-none");
 
     timer(num * 60);
 }
 
 function timer(seconds) {
+    console.log(seconds);
+
     clearInterval(countdown);
 
     const actualTime = Date.now();
@@ -20,7 +25,7 @@ function timer(seconds) {
     updateDisplay(seconds)
 
     countdown = setInterval(() => {
-        const secondsLeft = Math.round((setTime - Date.now()) / 1000);
+        secondsLeft = Math.round((setTime - Date.now()) / 1000);
 
         if (secondsLeft < 0) {
             clearInterval(countdown)
@@ -31,38 +36,34 @@ function timer(seconds) {
     
 }
 
-// intelege modificarea de mai jos
-// intelege modificarea de mai jos
-// intelege modificarea de mai jos
-// intelege modificarea de mai jos
-// intelege modificarea de mai jos
-
-
-// function updateDisplay(seconds) {
-//     const hours = Math.floor(seconds / 3600);
-//     const minutes = Math.floor(seconds / 60);
-//     const remainderSeconds = seconds % 60;
-//     const display = `${hours}h:${minutes}m:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
-//     document.title = display;
-//     timerDisplay.innerHTML = display;
-// }
-
-
 function updateDisplay(seconds) {
     const hours = Math.floor(seconds / 3600);
-    const remainingSecondsAfterHours = seconds % 3600;
-    const minutes = Math.floor(remainingSecondsAfterHours / 60);
-    const remainderSeconds = remainingSecondsAfterHours % 60;
+    const remainderSecondsAfterHours = seconds % 3600;
+    const minutes = Math.floor(remainderSecondsAfterHours / 60);
+    const remainderSeconds = remainderSecondsAfterHours % 60;
 
     const display = `${hours}h: ${minutes}m: ${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
     
     document.title = display;
     timerDisplay.innerHTML = display;
+    console.log(remainderSecondsAfterHours);
 }
 
 
+function pauseCountdown(){
+    pauseBtn.classList.toggle("display-none");
+    resumeBtn.classList.toggle("display-none");
 
-// pause/resume function
+    clearInterval(countdown);
+    
+    resumeBtn.addEventListener("click", function(){ 
+        timer(secondsLeft);
+        resumeBtn.classList.toggle("display-none");
+        pauseBtn.classList.toggle("display-none");
+    }); 
+    
+}
+
 
 // reset function
 
@@ -80,4 +81,8 @@ function updateDisplay(seconds) {
 startBtn.addEventListener("click", function(e) {
     e.preventDefault();
     processInputedTime();
+});
+
+pauseBtn.addEventListener("click", function(e) {
+    pauseCountdown();
 });

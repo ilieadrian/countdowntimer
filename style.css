@@ -25,6 +25,10 @@ body {
     text-align: center;
 }
 
+.display-none {
+    display: none;
+}
+
 .counter {
     height: 100%;
     display: flex;
@@ -98,10 +102,10 @@ input[type="button"]#resume  {
     background-color: rgb(19, 183, 99);
 }
 
-input[type="button"]#resume,
+/* input[type="button"]#resume,
 input[type="button"]#pause {
     display: none;
-}
+} */
 
 
 input[type="button"]#pause {
