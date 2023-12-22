@@ -40,16 +40,13 @@ h1 {
     margin-bottom: 1rem;
 }
 
-
 #timer {
     font-size: 8rem;
     font-weight: 500;
-    /* color: rgb(41, 173, 178); */
 }
 #timer.error {
     font-size: 3rem;
     font-weight: 500;
-    /* color: rgb(41, 173, 178); */
 }
 
 form {
@@ -106,12 +103,6 @@ input[type="button"]#start,
 input[type="button"]#resume  {
     background-color: rgb(19, 183, 99);
 }
-
-/* input[type="button"]#resume,
-input[type="button"]#pause {
-    display: none;
-} */
-
 
 input[type="button"]#pause {
     background-color: rgb(224, 202, 60);

@@ -1,3 +1,6 @@
+// TO fix: 
+// Bug 1: after hitting pause and resume two times the resume / pause sequence breaks and the ability to
+// pause is not longer available 
 const startBtn = document.getElementById("start");
 const pauseBtn = document.getElementById("pause");
 const resumeBtn = document.getElementById("resume");
@@ -35,11 +38,11 @@ function timer(seconds) {
 
         if (secondsLeft < 0) {
             clearInterval(countdown)
+            handleTimerFinish();
             return;
         }
         updateDisplay(secondsLeft);
-    }, 1000);
-    
+    }, 1000); 
 }
 
 function updateDisplay(seconds) {
@@ -54,19 +57,17 @@ function updateDisplay(seconds) {
     timerDisplay.innerHTML = display;
 }
 
-
 function pauseCountdown(){
     pauseBtn.classList.toggle("display-none");
     resumeBtn.classList.toggle("display-none");
 
     clearInterval(countdown);
-    
-    resumeBtn.addEventListener("click", function(){ 
-        timer(secondsLeft);
-        resumeBtn.classList.toggle("display-none");
-        pauseBtn.classList.toggle("display-none");
-    }); 
-    
+}
+
+function resumeCountdown(){
+    timer(secondsLeft);
+    resumeBtn.classList.toggle("display-none");
+    pauseBtn.classList.toggle("display-none");
 }
 
 function reset() {
@@ -81,12 +82,14 @@ function reset() {
     timerDisplay.classList.remove("error");
 }
 
-// set audio alert when time is done
+function handleTimerFinish() {
+    const audioNotification = new Audio('audio-notification.mp3')
+    audioNotification.play();
+    document.title = "Timer reached 0";
+    reset();
+}
 
 // store set time in local host and retrive it if is there
-
-
-
 
 startBtn.addEventListener("click", function(e) {
     e.preventDefault();
@@ -95,6 +98,10 @@ startBtn.addEventListener("click", function(e) {
 
 pauseBtn.addEventListener("click", function(e) {
     pauseCountdown();
+});
+
+resumeBtn.addEventListener("click", function(e) {
+    resumeCountdown();
 });
 
 resetBtn.addEventListener("click", function(e) {
