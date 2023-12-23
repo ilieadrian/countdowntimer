@@ -1,29 +1,35 @@
-// TO fix: 
-// Bug 1: after hitting pause and resume two times the resume / pause sequence breaks and the ability to
-// pause is not longer available 
 const startBtn = document.getElementById("start");
 const pauseBtn = document.getElementById("pause");
 const resumeBtn = document.getElementById("resume");
 const resetBtn = document.getElementById("reset");
 const timerDisplay = document.getElementById("timer");
+const warningToneReference = document.getElementById("warning-tone");
+const savedData = JSON.parse(localStorage.getItem('seconds'));
+const audioNotification = new Audio('audio-notification.mp3')
 let countdown;
 let secondsLeft;
 
+
 function processInputedTime() {
     const timeChosenByUser = document.getElementById("time").value.trim();
-    const num = parseInt(timeChosenByUser);
+    let num;
 
-    if (isNaN(num)) {
-        timerDisplay.textContent = "Please enter a number";
-        timerDisplay.classList.add("error");
-        document.getElementById("time").value = 180;
-        return;
+    if (savedData) {
+        num = +savedData;
+        timer(num);
+    } else {
+        num = parseInt(timeChosenByUser);
+        if (isNaN(num)) {
+            timerDisplay.textContent = "Please enter a number";
+            timerDisplay.classList.add("error");
+            document.getElementById("time").value = 180;
+            return;
+        } timer(num * 60);
     }
+
     timerDisplay.classList.remove("error");
     startBtn.classList.toggle("display-none");
     pauseBtn.classList.toggle("display-none");
-
-    timer(num * 60);
 }
 
 function timer(seconds) {
@@ -46,6 +52,14 @@ function timer(seconds) {
 }
 
 function updateDisplay(seconds) {
+    // if (timerDisplay.innerText = "NaNh: NaNm: NaNs") {
+    //     let secondsFromLocal = +savedData;
+    //     const hours = Math.floor(seconds / 3600);
+    //     const remainderSecondsAfterHours = seconds % 3600;
+    //     const minutes = Math.floor(remainderSecondsAfterHours / 60);
+    //     const remainderSeconds = remainderSecondsAfterHours % 60;
+    // }
+
     const hours = Math.floor(seconds / 3600);
     const remainderSecondsAfterHours = seconds % 3600;
     const minutes = Math.floor(remainderSecondsAfterHours / 60);
@@ -62,12 +76,14 @@ function pauseCountdown(){
     resumeBtn.classList.toggle("display-none");
 
     clearInterval(countdown);
+    localStorage.setItem('seconds', JSON.stringify(secondsLeft));
 }
 
 function resumeCountdown(){
     timer(secondsLeft);
     resumeBtn.classList.toggle("display-none");
     pauseBtn.classList.toggle("display-none");
+    localStorage.removeItem('seconds');
 }
 
 function reset() {
@@ -76,6 +92,7 @@ function reset() {
     startBtn.classList.remove("display-none");
 
     clearInterval(countdown);
+    localStorage.removeItem('seconds');
 
     document.getElementById("time").value = 180;
     timerDisplay.textContent = "00h:00m:00s";
@@ -83,13 +100,11 @@ function reset() {
 }
 
 function handleTimerFinish() {
-    const audioNotification = new Audio('audio-notification.mp3')
     audioNotification.play();
     document.title = "Timer reached 0";
+    localStorage.removeItem('seconds');
     reset();
 }
-
-// store set time in local host and retrive it if is there
 
 startBtn.addEventListener("click", function(e) {
     e.preventDefault();
@@ -106,4 +121,12 @@ resumeBtn.addEventListener("click", function(e) {
 
 resetBtn.addEventListener("click", function(e) {
     reset();
+});
+
+warningToneReference.addEventListener("click", function() {
+    audioNotification.play();
+});
+
+window.addEventListener("load", function(e) {
+    updateDisplay();
 });
