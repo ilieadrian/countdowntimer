@@ -5,7 +5,8 @@ const resetBtn = document.getElementById("reset");
 const timerDisplay = document.getElementById("timer");
 const warningToneReference = document.getElementById("warning-tone");
 const savedData = JSON.parse(localStorage.getItem('seconds'));
-const audioNotification = new Audio('audio-notification.mp3')
+const audioNotification = new Audio('audio-notification.mp3');
+let display;
 let countdown;
 let secondsLeft;
 
@@ -52,20 +53,16 @@ function timer(seconds) {
 }
 
 function updateDisplay(seconds) {
-    // if (timerDisplay.innerText = "NaNh: NaNm: NaNs") {
-    //     let secondsFromLocal = +savedData;
-    //     const hours = Math.floor(seconds / 3600);
-    //     const remainderSecondsAfterHours = seconds % 3600;
-    //     const minutes = Math.floor(remainderSecondsAfterHours / 60);
-    //     const remainderSeconds = remainderSecondsAfterHours % 60;
-    // }
+    if (timerDisplay.innerText == "NaNh: NaNm: NaNs") {
+        console.log("neh na na")
+    }
 
     const hours = Math.floor(seconds / 3600);
     const remainderSecondsAfterHours = seconds % 3600;
     const minutes = Math.floor(remainderSecondsAfterHours / 60);
     const remainderSeconds = remainderSecondsAfterHours % 60;
 
-    const display = `${hours}h: ${minutes}m: ${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
+    display = `${hours}h: ${minutes}m: ${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
     
     document.title = display;
     timerDisplay.innerHTML = display;
@@ -92,11 +89,12 @@ function reset() {
     startBtn.classList.remove("display-none");
 
     clearInterval(countdown);
-    localStorage.removeItem('seconds');
 
     document.getElementById("time").value = 180;
-    timerDisplay.textContent = "00h:00m:00s";
+    timerDisplay.textContent = "00h: 00m: 00s";
     timerDisplay.classList.remove("error");
+    localStorage.removeItem('seconds');
+
 }
 
 function handleTimerFinish() {
@@ -128,5 +126,10 @@ warningToneReference.addEventListener("click", function() {
 });
 
 window.addEventListener("load", function(e) {
-    updateDisplay();
+    if (savedData) {
+        updateDisplay(savedData);
+    } else {
+        display = "00h: 00m: 00s";
+        timerDisplay.innerHTML = display;
+    }
 });
