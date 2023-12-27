@@ -53,19 +53,18 @@ function timer(seconds) {
 }
 
 function updateDisplay(seconds) {
-    if (timerDisplay.innerText == "NaNh: NaNm: NaNs") {
-        console.log("neh na na")
-    }
+    display = formatTime(seconds);    
+    document.title = display;
+    timerDisplay.innerHTML = display;
+}
 
+function formatTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const remainderSecondsAfterHours = seconds % 3600;
     const minutes = Math.floor(remainderSecondsAfterHours / 60);
     const remainderSeconds = remainderSecondsAfterHours % 60;
 
-    display = `${hours}h: ${minutes}m: ${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
-    
-    document.title = display;
-    timerDisplay.innerHTML = display;
+    return `${hours}h: ${minutes}m: ${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}s`;
 }
 
 function pauseCountdown(){
@@ -94,13 +93,11 @@ function reset() {
     timerDisplay.textContent = "00h: 00m: 00s";
     timerDisplay.classList.remove("error");
     localStorage.removeItem('seconds');
-
 }
 
 function handleTimerFinish() {
     audioNotification.play();
     document.title = "Timer reached 0";
-    localStorage.removeItem('seconds');
     reset();
 }
 
