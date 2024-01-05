@@ -10,7 +10,6 @@ let display;
 let countdown;
 let secondsLeft;
 
-
 function processInputedTime() {
     const timeChosenByUser = document.getElementById("time").value.trim();
     let num;

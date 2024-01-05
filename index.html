@@ -17,24 +17,23 @@
                 <h4 class="description">Info:</h4>
                 <p class="description">Pause button saves the remaining time in the local memory. When you return to the site, you can continue where you left off. Cancel with reset.</p>
                 <p class="description">At the end of the countdown, a <span id="warning-tone">&#x1F50A; warning tone</span> is emitted.</p>
-            </div>
-            
+            </div>          
         </div>
 
         <div id="timer"></div>
-            <form action="post">
-                <div class="inputs">
-                    <label for="time">Set time in minutes:</label>
-                    <input type="text" name="time" id="time" value="180" >
-                </div>
-                <div class="controls">
-                    <input type="button" id="start" value="&#x23F5; Start" />
-                    <input type="button" id="pause" class="display-none" value="&#x23F8; Pause" />
-                    <input type="button" id="resume" class="display-none" value="&#x23F5; Resume" />
-                    <input type="button" id="reset"value="&#x27F2; Reset" />
-                </div>
-            </form>
         
+        <form>
+            <div class="input">
+                <label for="time">Set time in minutes:</label>
+                <input type="text" name="time" id="time" value="180" >
+            </div>
+            <div class="controls">
+                <input type="button" id="start" value="&#x23F5; Start" />
+                <input type="button" id="pause" class="display-none" value="&#x23F8; Pause" />
+                <input type="button" id="resume" class="display-none" value="&#x23F5; Resume" />
+                <input type="button" id="reset"value="&#x27F2; Reset" />
+            </div>
+        </form>
     </div>
     <p class="attribution">Coded by<a href="http://ilieadrian.com">Ilie Adrian</a></p>
     <script src="script.js"></script>
