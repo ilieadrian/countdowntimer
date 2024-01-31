@@ -22,7 +22,7 @@ function processInputedTime() {
         if (isNaN(num)) {
             timerDisplay.textContent = "Please enter a number";
             timerDisplay.classList.add("error");
-            document.getElementById("time").value = 180;
+            document.getElementById("time").value = 240;
             return;
         } timer(num * 60);
     }
