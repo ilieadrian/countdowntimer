@@ -88,7 +88,7 @@ function reset() {
 
     clearInterval(countdown);
 
-    document.getElementById("time").value = 180;
+    document.getElementById("time").value = 240;
     timerDisplay.textContent = "00h: 00m: 00s";
     timerDisplay.classList.remove("error");
     localStorage.removeItem('seconds');
