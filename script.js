@@ -92,6 +92,7 @@ function reset() {
     timerDisplay.textContent = "00h: 00m: 00s";
     timerDisplay.classList.remove("error");
     localStorage.removeItem('seconds');
+    location.reload();
 }
 
 function handleTimerFinish() {
