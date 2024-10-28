@@ -22,7 +22,7 @@ function processInputedTime() {
         if (isNaN(num)) {
             timerDisplay.textContent = "Please enter a number";
             timerDisplay.classList.add("error");
-            document.getElementById("time").value = 180;
+            document.getElementById("time").value = 300;
             return;
         } timer(num * 60);
     }
@@ -88,7 +88,7 @@ function reset() {
 
     clearInterval(countdown);
 
-    document.getElementById("time").value = 180;
+    document.getElementById("time").value = 300;
     timerDisplay.textContent = "00h: 00m: 00s";
     timerDisplay.classList.remove("error");
     localStorage.removeItem('seconds');
